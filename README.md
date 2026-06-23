@@ -1,6 +1,6 @@
 # HarmonyOS 官方指南 MCP 知识库
 
-把华为鸿蒙(HarmonyOS)官方开发指南(5489 篇)封装成 MCP 检索服务,供 Claude Code / opencode / Cursor / Cline 等 AI 编程客户端在开发时调用——**调用某个鸿蒙 API/Kit 前,先检索官方指南确认用法与参数,避免凭空编造 `@ohos.*` 接口**。
+将华为鸿蒙(HarmonyOS)官方开发指南封装成 MCP 检索服务,供 Claude Code / opencode / Cursor / Cline 等 AI 编程客户端在开发时调用——**调用某个鸿蒙 API/Kit 前,先检索官方指南确认用法与参数,避免凭空编造 `@ohos.*` 接口**。
 
 ## 这是什么
 
@@ -8,7 +8,7 @@
 |------|------|---------|
 | **① MCP 服务器** | 检索引擎,3 个工具:指南全文检索 / 读指南 / 按分类路径浏览 | npm 包(`npx` 即用) |
 | **② Skill** | 引导 AI"查 API 用法先检索官方指南"的流程说明 | 复制到 skills 目录 |
-| **数据源** | 5489 篇官方指南 + `_crawl_log.txt`(分类) + `INDEX.md`(目录树) | 文档随包(52MB,压缩后 8.8MB) |
+| **数据源** | 官方指南 + `_crawl_log.txt`(分类) + `INDEX.md`(目录树) | 文档随包(52MB,压缩后 8.8MB) |
 
 与姊妹项目 [`harmonyos-best-practices-mcp`](https://github.com/2351548518/harmonyos-best-practices-mcp) 分工互补:
 
