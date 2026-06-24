@@ -10,16 +10,42 @@
 | **② Skill** | 引导 AI"查 API 用法先检索官方指南"的流程说明 | 复制到 skills 目录 |
 | **数据源** | 官方指南 + `_crawl_log.txt`(分类) + `INDEX.md`(目录树) | 文档随包(52MB,压缩后 8.8MB) |
 
-与姊妹项目 [`harmonyos-best-practices-mcp`](https://github.com/2351548518/harmonyos-best-practices-mcp) 分工互补:
+与姊妹项目分工互补:
 
-| | 本项目(guides) | best-practices |
-|---|---|---|
-| 查什么 | **API/Kit 用法**——接口参数、调用流程、生命周期 | **场景最佳实践 + 参考代码** |
-| 数据 | 5489 篇官方指南 | 452 篇 + 186 代码仓库 |
-| 工具 | 3 个 | 4 个(多代码读取) |
-| 适用 | "AVPlayer 怎么初始化""Audio Kit 录音接口" | "长列表丢帧怎么优化""组件复用范例" |
+| | 本项目(guides) | best-practices | api-references | ui-design-guides |
+|---|---|---|---|---|
+| 查什么 | **API 用法、调用流程** | **场景最佳实践 + 参考代码** | **接口精确定义**(参数/枚举) | **设计怎么做**(视觉/交互/控件设计规范) |
+| 数据 | 5489 篇指南 | 452 篇 + 186 代码仓库 | 4495 篇 API 参考 | 166 篇设计指南 |
+| 适用 | "AVPlayer 怎么初始化" | "长列表丢帧优化""组件复用范例" | "AudioCapturer 方法签名" | "底部页签设计规范""暗色模式色彩" |
 
-两者可并列使用:先 guides 查清 API 用法,再 best-practices 看该场景怎么做最好。
+四者并列:guides 讲 API 用法、best-practices 给场景实践与参考代码、api-references 查精确签名、ui-design-guides 定设计规范。
+
+## 四者并列使用(opencode 示例)
+
+```json
+{
+  "mcp": {
+    "harmonyos-best-practices": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-best-practices-mcp"]
+    },
+    "harmonyos-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-guides-mcp"]
+    },
+    "harmonyos-api-references": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-api-references-mcp"]
+    },
+    "harmonyos-ui-design-guides": {
+      "type": "local",
+      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp"]
+    }
+  }
+}
+```
+
+搭配各自的 Skill(`harmonyos-best-practices` / `harmonyos-guides` / `harmonyos-api-references` / `harmonyos-ui-design-guides`),AI 可据需求选用:guides 查 API 用法、best-practices 查场景实践与参考代码、api-references 查精确签名、ui-design-guides 查设计规范。
 
 ## 快速开始(最终用户)
 
