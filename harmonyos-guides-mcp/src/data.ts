@@ -7,6 +7,7 @@ export interface DocMeta {
   title: string;    // last segment of path, or docId
   path: string;     // full multi-level path, e.g. "媒体 / Audio Kit / 录音"
   topic: string;    // first segment of path (top-level category)
+  headings: string; // all markdown heading texts joined (for search scoring)
 }
 
 export interface DataStore {
@@ -47,7 +48,7 @@ function parseCrawlLog(docsDir: string): Map<string, DocMeta> {
     const segs = fullPath.split(SEP).map((s) => s.trim()).filter(Boolean);
     const topic = segs[0] || "未分类";
     const title = segs.length ? segs[segs.length - 1] : docId;
-    docs.set(docId, { docId, title, path: fullPath, topic });
+    docs.set(docId, { docId, title, path: fullPath, topic, headings: "" });
   }
   return docs;
 }
@@ -73,8 +74,37 @@ export function getStore(): DataStore {
     topics.set(meta.topic, arr);
   }
 
+  // Preload all markdown headings — section-level signal for search (covers full doc).
+  for (const meta of docs.values()) {
+    meta.headings = extractHeadings(docsDir, meta.docId);
+  }
+
   _store = { docs, topics, docsDir };
   return _store;
+}
+
+/** Extract all markdown heading texts from a doc, joined by space. Light & full-text. */
+export function extractHeadings(docsDir: string, docId: string): string {
+  const file = path.join(docsDir, `${docId}.md`);
+  let text: string;
+  try {
+    text = fs.readFileSync(file, "utf8");
+  } catch {
+    return "";
+  }
+  const heads: string[] = [];
+  for (const line of text.split(/\r?\n/)) {
+    const m = line.match(/^#{1,6}\s+(.+?)\s*#*\s*$/);
+    if (m) {
+      const clean = m[1]
+        .replace(/\*\*/g, "")
+        .replace(/`([^`]+)`/g, "$1")
+        .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+        .trim();
+      if (clean) heads.push(clean);
+    }
+  }
+  return heads.join("  ");
 }
 
 /** Read a guide's full markdown body. Returns null if missing. */

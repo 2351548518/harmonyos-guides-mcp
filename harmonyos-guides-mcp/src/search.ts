@@ -62,6 +62,8 @@ export function search(store: DataStore, query: string, limit = 8): SearchHit[] 
     let score = 0;
     score += scoreAgainst(qTf, tokenize(meta.title), 5);
     score += scoreAgainst(qTf, tokenize(meta.path), 3);
+    // All markdown headings — section-level signal, covers full doc (not just first 200 lines).
+    score += scoreAgainst(qTf, tokenize(meta.headings), 3);
     score += scanBody(store.docsDir, meta.docId, qTf, 200);
     if (score <= 0) continue;
     hits.push({

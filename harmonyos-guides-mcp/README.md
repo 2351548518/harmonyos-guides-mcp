@@ -37,6 +37,31 @@
 |------|------|------|
 | `BP_DOCS_DIR` | 包内 `data/docs` | 文档目录(一般无需改) |
 
+## 更新
+
+指南文档和服务器会持续更新(版本号见 `package.json`)。
+
+**更新服务器**:
+
+```bash
+# npx -y 方式:无需手动操作,每次启动自动拉最新版
+# 全局安装方式:手动更新
+npm update -g harmonyos-guides-mcp
+# 或锁定最新版
+npm install -g harmonyos-guides-mcp@latest
+```
+
+更新后**重启 AI 客户端**(Claude Code / opencode / Cursor 等),让新进程加载新版 MCP。
+
+**更新文档**:5489 篇指南随包内置(`data/docs/`),更新 npm 包即同步更新,无需单独操作。guides 为纯文档,无代码包。
+
+**查看版本**:
+```bash
+npm view harmonyos-guides-mcp version   # 最新发布版
+npm ls -g harmonyos-guides-mcp          # 本地已装版本
+```
+或看客户端 MCP 面板里服务器的 `version` 字段。
+
 ## 与 best-practices 并列使用(opencode 示例)
 
 ```json

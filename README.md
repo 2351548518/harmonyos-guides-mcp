@@ -44,6 +44,26 @@
 
 将 `skills/harmonyos-guides/SKILL.md` 复制到 Claude Code 的 skills 目录(如 `~/.claude/skills/`)。这让 AI 在查鸿蒙 API/Kit 用法时自动走"先检索官方指南"的流程。
 
+## 更新
+
+指南文档和 MCP 服务器会持续更新。更新方式:
+
+**更新 MCP 服务器**(npm 包):
+
+```bash
+# npx 方式:加 -y 会自动拉最新版,无需手动操作
+# 若用全局安装,手动更新:
+npm update -g harmonyos-guides-mcp
+# 或指定版本:
+npm install -g harmonyos-guides-mcp@latest
+```
+
+更新后**重启 AI 客户端**(Claude Code / Cursor 等)让新进程加载新版 MCP。
+
+**更新文档**(随 npm 包内置,无需单独操作):更新 MCP 包即同步更新 5489 篇指南。guides 为纯文档,无代码包,无需额外下载。
+
+**查看当前版本**:`npm view harmonyos-guides-mcp version`(最新发布版)或看客户端 MCP 面板里服务器的 version 字段。
+
 ## 三个 MCP 工具
 
 | 工具 | 作用 |
