@@ -1,17 +1,19 @@
 ---
 name: harmonyos-guides
-description: 查 HarmonyOS 官方 API/Kit 用法、接口参数、调用流程、开发指南时触发(如 "AVPlayer 怎么初始化"、"Audio Kit 录音接口"、"ArkUI List 滑动属性"、"Ability 生命周期")。对应 harmonyos-guides-mcp 的 search_guides / get_guide / list_guides_by_topic 工具,检索 5489 篇官方开发指南。注意:这是查"API 怎么用",若要场景化最佳实践和参考代码请用 harmonyos-best-practices。
+description: 查 HarmonyOS 官方 API/Kit 用法、接口参数、调用流程、开发指南时触发(如 "AVPlayer 怎么初始化"、"Audio Kit 录音接口"、"ArkUI List 滑动属性"、"Ability 生命周期")。对应 harmonyos-guides-mcp 的 search_guides / get_guide / list_guides_by_topic 工具,检索 5489 篇官方开发指南。注意:这是查"API 怎么用"(用法/调用流程/示例),若查接口精确定义用 harmonyos-api-references,查场景最佳实践和参考代码用 harmonyos-best-practices,查设计规范用 harmonyos-ui-design-guides。
 ---
 
 # 鸿蒙官方指南 检索指引
 
 本地有 5489 篇 HarmonyOS 官方开发指南(harmonyos-guides-mcp 提供),覆盖各 Kit/API 的用法、接口参数、调用流程。**在为用户调用某个鸿蒙 API/Kit 前,若不确定其用法或参数,先检索官方指南,不要凭记忆编造 `@ohos.*` 接口。**
 
-## 何时用本 Skill(而非 best-practices)
+## 何时用本 Skill(而非 best-practices/api-references/ui-design-guides)
 
-- ✅ 用本指南:查**某个 API/Kit 怎么用**——接口名、参数、返回值、调用顺序、生命周期。例:"AVPlayer 状态机""AudioCapturer 录音参数""ArkUI Text 组件属性""Ability 启动模式"。
-- ❌ 用 best-practices:查**某类场景的最佳做法 + 参考代码**——性能/稳定性/功耗优化、长列表丢帧、组件复用范例。
-- 两者可配合:先本指南查清 API 用法,再 best-practices 看该场景怎么做最好。
+- ✅ 用本指南:查**某个 API/Kit 怎么用**——接口名、参数、返回值、调用顺序、生命周期、示例代码。例:"AVPlayer 状态机""AudioCapturer 录音参数""ArkUI Text 组件属性""Ability 启动模式"。
+- ❌ 用 best-practices:查**场景最佳实践 + 参考代码**(怎么做最好)。
+- ❌ 用 api-references:查**接口精确定义**(参数/枚举/错误码)。
+- ❌ 用 ui-design-guides:查**设计怎么做**(视觉/交互/控件设计规范)。
+- 配合:先本指南查清 API 用法,再用 api-references 查精确签名、best-practices 看场景实践、ui-design-guides 定设计规范。
 
 ## 检索流程
 
