@@ -16,9 +16,11 @@
 
 | 工具 | 作用 |
 |------|------|
-| `search_guides({query, limit?})` | 全文检索指南(中文友好),返回相关度排序的文档列表(含标题、分类路径) |
+| `search_guides({query, limit?})` | 全文检索指南(BM25 + CJK 权重 + 同义词扩展,中文友好),返回相关度排序的文档列表(含标题、分类路径) |
 | `get_guide({name})` | 读取指定指南(docId)的完整 Markdown 正文 |
 | `list_guides_by_topic({topic?})` | 按分类路径浏览;支持多级下钻(如 `媒体` → `媒体 / Audio Kit`) |
+
+**检索算法**:BM25 排序(TF 饱和 + 文档长度归一化 + IDF)→ CJK 单字×0.3 / 双字 bigram×0.5 降权(抑制跨词边界噪声)→ 域内同义词软 OR 扩展(`data/synonyms.json` 驱动)。同义词词典数据驱动,编辑 JSON 即可扩展,无需改代码。
 
 数据规模:5489 篇指南,顶级类含 基础入门(34)、应用框架(835)、系统(778)、媒体(295)、图形(182)、应用服务(710) 等。
 
@@ -31,19 +33,32 @@
   "mcpServers": {
     "harmonyos-guides": {
       "command": "npx",
-      "args": ["-y", "harmonyos-guides-mcp"]
+      "args": ["-y", "harmonyos-guides-mcp@latest"]
     }
   }
 }
 ```
 
-或全局安装:`npm install -g harmonyos-guides-mcp`。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
+> `@latest` 每次启动联网拉最新版(图省事);也可固定版本如 `@0.2.1` 避免版本漂移与启动联网。或全局安装:`npm install -g harmonyos-guides-mcp`。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
 
 ### 环境变量
 
 | 变量 | 默认 | 说明 |
 |------|------|------|
 | `BP_DOCS_DIR` | 包内 `data/docs` | 文档目录(一般无需改) |
+| `BP_LOG` | 包内 `data/index_log.txt` | 分类日志(驱动文档分类,缺失会报错;一般无需改) |
+
+> `data/synonyms.json` 为同义词词典(随包),缺失时检索退化为无同义词扩展,不影响正常使用。`data/INDEX.md` 是人读文档索引(代码不读)。
+
+### 数据布局(包内 `data/`)
+
+```
+data/
+├── docs/           # 纯 .md 文档(5489 篇)
+├── index_log.txt   # 分类日志(机器读,驱动分类)
+├── synonyms.json   # 同义词词典(检索用,可编辑扩展)
+└── INDEX.md        # 人读文档索引(按大类分组,代码不读)
+```
 
 ## 更新
 
@@ -79,20 +94,20 @@ npm ls -g harmonyos-guides-mcp          # 本地已装版本
   "mcp": {
     "harmonyos-best-practices": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-best-practices-mcp"],
+      "command": ["npx", "-y", "harmonyos-best-practices-mcp@latest"],
       "environment": { "BP_CODE_DIR": "/abs/path/to/best_practices_code" }
     },
     "harmonyos-guides": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-guides-mcp"]
+      "command": ["npx", "-y", "harmonyos-guides-mcp@latest"]
     },
     "harmonyos-api-references": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-api-references-mcp"]
+      "command": ["npx", "-y", "harmonyos-api-references-mcp@latest"]
     },
     "harmonyos-ui-design-guides": {
       "type": "local",
-      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp"]
+      "command": ["npx", "-y", "harmonyos-ui-design-guides-mcp@latest"]
     }
   }
 }
@@ -105,20 +120,20 @@ npm ls -g harmonyos-guides-mcp          # 本地已装版本
   "mcpServers": {
     "harmonyos-best-practices": {
       "command": "npx",
-      "args": ["-y", "harmonyos-best-practices-mcp"],
+      "args": ["-y", "harmonyos-best-practices-mcp@latest"],
       "env": { "BP_CODE_DIR": "/abs/path/to/best_practices_code" }
     },
     "harmonyos-guides": {
       "command": "npx",
-      "args": ["-y", "harmonyos-guides-mcp"]
+      "args": ["-y", "harmonyos-guides-mcp@latest"]
     },
     "harmonyos-api-references": {
       "command": "npx",
-      "args": ["-y", "harmonyos-api-references-mcp"]
+      "args": ["-y", "harmonyos-api-references-mcp@latest"]
     },
     "harmonyos-ui-design-guides": {
       "command": "npx",
-      "args": ["-y", "harmonyos-ui-design-guides-mcp"]
+      "args": ["-y", "harmonyos-ui-design-guides-mcp@latest"]
     }
   }
 }
