@@ -97,7 +97,7 @@
 }
 ```
 
-> 包名以实际发布为准。`@latest` 让每次启动拉最新版(图省事);也可固定版本如 `@0.2.1` 避免版本漂移。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
+> 包名以实际发布为准。`@latest` 让每次启动拉最新版;也可固定版本如 `@0.2.1` 避免版本漂移。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
 
 ### 2. 装 Skill
 

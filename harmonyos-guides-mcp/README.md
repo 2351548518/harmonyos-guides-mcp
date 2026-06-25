@@ -39,7 +39,7 @@
 }
 ```
 
-> `@latest` 每次启动联网拉最新版(图省事);也可固定版本如 `@0.2.1` 避免版本漂移与启动联网。或全局安装:`npm install -g harmonyos-guides-mcp`。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
+> `@latest` 每次启动联网拉最新版;也可固定版本如 `@0.2.1` 避免版本漂移与启动联网。或全局安装:`npm install -g harmonyos-guides-mcp`。任何支持 stdio 的 MCP 客户端(opencode / Cursor / Cline / Continue)同样配置。
 
 ### 环境变量
 
